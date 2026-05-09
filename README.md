@@ -4,14 +4,14 @@ Static site for CleanCut: About + Privacy Policy + Terms of Use + Support. Hoste
 
 ## Files
 
-| File | Purpose |
-|---|---|
-| `index.html` | About / landing page |
+| File           | Purpose                                                                               |
+| -------------- | ------------------------------------------------------------------------------------- |
+| `index.html`   | About / landing page                                                                  |
 | `privacy.html` | Privacy Policy (URL goes in App Store Connect → App Information → Privacy Policy URL) |
-| `terms.html` | Terms of Use |
-| `support.html` | Support page (URL goes in App Store Connect → App Information → Support URL) |
-| `style.css` | Shared styles |
-| `.nojekyll` | Tells GitHub Pages to serve files as-is, no Jekyll build |
+| `terms.html`   | Terms of Use                                                                          |
+| `support.html` | Support page (URL goes in App Store Connect → App Information → Support URL)          |
+| `style.css`    | Shared styles                                                                         |
+| `.nojekyll`    | Tells GitHub Pages to serve files as-is, no Jekyll build                              |
 
 ## Publish to GitHub Pages
 
@@ -65,9 +65,9 @@ gh repo create cleancut-legal --public --source=. --remote=origin --push
 
 Open these in an incognito window (proves they're truly public):
 
-- `https://<your-username>.github.io/cleancut-legal/`             ← About
+- `https://<your-username>.github.io/cleancut-legal/` ← About
 - `https://<your-username>.github.io/cleancut-legal/privacy.html` ← Privacy Policy
-- `https://<your-username>.github.io/cleancut-legal/terms.html`   ← Terms of Use
+- `https://<your-username>.github.io/cleancut-legal/terms.html` ← Terms of Use
 - `https://<your-username>.github.io/cleancut-legal/support.html` ← Support
 
 ### Step 5 — Paste the URLs back into the submission plan
