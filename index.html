@@ -123,10 +123,122 @@
   </div>
 
   <!-- ======================================================== -->
-  <!-- TEMP PLACEHOLDER — Chunk 4 replaces this with             -->
-  <!-- moat / pricing / FAQ / founder sections                   -->
+  <!-- Section 4: Privacy moat (dark strip)                      -->
   <!-- ======================================================== -->
-  <p style="color:#9a9aa3; text-align:center; padding:40px 0;"><em>(More sections coming in Chunk 4.)</em></p>
+  <section class="moat">
+    <div class="moat-eyebrow">On-device. Always.</div>
+    <h2>Your voice. Your iPhone. No cloud.</h2>
+    <p><em>Every comparable tool uploads your audio to a server.</em> Descript, Riverside, Cleanvoice, Adobe Podcast — all of them ship your voice to a data center, run AI on it, and ship the result back. That's how it's been because the models were too big to run on a phone.</p>
+    <p>CleanCut runs entirely on your iPhone. The transcription model is Apple's on-device SpeechAnalyzer (or SFSpeechRecognizer on iOS 17–25). The denoise model is DeepFilterNet3, a small neural network built for embedded inference. The merge timeline is AVFoundation. No analytics SDK, no third-party tracker, no account. Turn on airplane mode — CleanCut still works.</p>
+    <p>That's not a marketing claim we can hide behind. It's a structural property: <em>there's no server to send it to.</em></p>
+  </section>
+
+  <!-- ======================================================== -->
+  <!-- Section 5: Pricing (4-card grid)                          -->
+  <!-- ======================================================== -->
+  <h2>Pricing</h2>
+  <div class="pricing">
+
+    <div class="tier-card">
+      <div class="tier-label">Free</div>
+      <div class="tier-price">$0</div>
+      <div class="tier-period">free forever</div>
+      <ul>
+        <li>3 Smart Cut sessions / day</li>
+        <li>3 Denoise sessions / day</li>
+        <li>Files ≤ 5 min (Smart Cut) or 3 min (Denoise)</li>
+        <li>Unlimited Merge, up to 3 clips</li>
+        <li>WAV export</li>
+      </ul>
+      <a class="cta-ghost" href="#">Download →</a>
+    </div>
+
+    <div class="tier-card">
+      <div class="tier-label">Pro Monthly</div>
+      <div class="tier-price">$3.99</div>
+      <div class="tier-period">per month · 7-day free trial</div>
+      <ul>
+        <li>Everything in Free, unlimited</li>
+        <li>Export to M4A, MP3, WAV</li>
+        <li>No watermark</li>
+        <li>Custom filler libraries</li>
+        <li>Background processing</li>
+      </ul>
+      <a class="cta" href="#">Start trial</a>
+    </div>
+
+    <div class="tier-card highlighted">
+      <div class="ribbon">Best Value</div>
+      <div class="tier-label">Pro Yearly</div>
+      <div class="tier-price">$19.99</div>
+      <div class="tier-period">per year · save 58% · 7-day free trial</div>
+      <ul>
+        <li>Everything in Free, unlimited</li>
+        <li>Export to M4A, MP3, WAV</li>
+        <li>No watermark</li>
+        <li>Custom filler libraries</li>
+        <li>Background processing</li>
+      </ul>
+      <a class="cta" href="#">Start trial</a>
+    </div>
+
+    <div class="tier-card">
+      <div class="tier-label">Lifetime</div>
+      <div class="tier-price">$39.99</div>
+      <div class="tier-period">once · no subscription</div>
+      <ul>
+        <li>Everything in Pro, forever</li>
+        <li>One-time purchase</li>
+        <li>Never billed again</li>
+        <li>Same features as Pro Yearly</li>
+      </ul>
+      <a class="cta" href="#">Buy Lifetime</a>
+    </div>
+
+  </div>
+  <p class="cta-disclaimer" style="text-align:center; margin-top:8px;">App Store links go live at launch. Restore Purchases lives in Settings → Subscription. Cancel anytime.</p>
+
+  <!-- ======================================================== -->
+  <!-- Section 6: FAQ                                            -->
+  <!-- ======================================================== -->
+  <h2>FAQ</h2>
+  <div class="faq">
+    <details>
+      <summary>Does Smart Cut work without internet?</summary>
+      <p>Yes. Both Smart Cut (transcription) and Denoise run on-device. You can put your phone in airplane mode and CleanCut works.</p>
+    </details>
+    <details>
+      <summary>Which languages does Smart Cut support?</summary>
+      <p>Whatever your iPhone's Speech framework supports — typically English, Spanish, Portuguese, French, German, Italian, Japanese, Korean, Chinese, and ~20 more. You pick a language per session. No bilingual auto-detect at launch (single language per recording).</p>
+    </details>
+    <details>
+      <summary>How does the iOS 26 version differ from iOS 17?</summary>
+      <p>iOS 26 uses Apple's new SpeechAnalyzer for long-form streaming with a live transcript pane that updates as the analysis runs. iOS 17–25 uses SFSpeechRecognizer in 30-second chunks — same accuracy, just shown as a progress bar instead of streaming text.</p>
+    </details>
+    <details>
+      <summary>How long does a recording take to process?</summary>
+      <p>Roughly 2.5× faster than real time on iPhone 15 Pro and newer. A 30-minute recording takes ~12 minutes of foreground processing, or you can hit "Run in BG" and lock your phone.</p>
+    </details>
+    <details>
+      <summary>Why is the free tier limited?</summary>
+      <p>The free tier covers a daily voice memo (3 Smart Cut + 3 Denoise sessions a day, ≤5 min each). Beyond that, the on-device models use real CPU/battery, so the economics need to net out. Pro is the unlock for unlimited processing.</p>
+    </details>
+    <details>
+      <summary>Is there a Mac version?</summary>
+      <p>Not at launch. The on-device models are tuned for iPhone first. macOS Catalyst is on the roadmap but not v1.x.</p>
+    </details>
+  </div>
+
+  <!-- ======================================================== -->
+  <!-- Section 7: Founder note                                   -->
+  <!-- ======================================================== -->
+  <div class="founder">
+    <p>Hi, I'm Đạt. I built CleanCut because I record voice notes constantly — drafts, demos, talking-to-myself thinking sessions — and I wanted to clean them up without uploading them anywhere.</p>
+    <p>Every audio tool I tried sent my audio to a server. Some had decent privacy policies. None of them were as good as "the audio just never leaves your phone." So I built that.</p>
+    <p>Smart Cut runs on Apple's SpeechAnalyzer (iOS 26) and SFSpeechRecognizer (iOS 17–25). Denoise uses DeepFilterNet3, a 1.7M-parameter neural network compiled to Core ML. Merge is straight AVFoundation. No backend. No analytics. Three tools, on the phone.</p>
+    <p>Free tier is generous (3 sessions a day forever — enough for a daily voice memo). Pro is $3.99/mo or $19.99/yr if you want it unlimited; one-time $39.99 if you hate subscriptions (I do too).</p>
+    <p>Feedback welcome — <a href="mailto:support@cleancut.app">support@cleancut.app</a>.</p>
+  </div>
 
 </main>
 
