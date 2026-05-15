@@ -694,59 +694,53 @@ nav.site a:hover {
   border-left: 2px dashed rgba(234, 88, 12, 0.45);
   margin-left: 6px;
 }
-.dash-stats {
-  display: flex;
-  flex-wrap: nowrap;
-  align-items: flex-start;
-  gap: 20px;
+/* 2×2 stat grid — number sits BESIDE label, eliminating any vertical alignment bug. */
+.grid2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px 24px;
   margin-top: 20px;
   padding-top: 18px;
   border-top: 1px solid rgba(28, 28, 30, 0.08);
   position: relative;
   z-index: 1;
 }
-.dash-stat {
+.grid2-cell {
   display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  gap: 2px;
-  padding-right: 18px;
-  border-right: 1px solid rgba(28, 28, 30, 0.06);
-  flex: 1 1 0;
-  min-width: 0;
-  min-height: 0;
+  align-items: baseline;
+  gap: 14px;
+  padding: 4px 0;
 }
-.dash-stat:first-child { flex: 1.4 1 0; }
-.dash-stat:last-child { border-right: none; padding-right: 0; }
-.dash-stat .num {
+.grid2-cell .num {
   font-family: 'Newsreader', Georgia, serif;
-  font-size: 34px;
+  font-size: 38px;
   font-weight: 800;
   letter-spacing: -1px;
   font-variant-numeric: tabular-nums;
   line-height: 1;
   color: var(--text);
+  min-width: 80px;
 }
-.dash-stat .num.hero {
-  font-size: 40px;
-  color: var(--action);
-}
-.dash-stat .num .arrow {
+.grid2-cell.hero .num { color: var(--action); font-size: 42px; }
+.grid2-cell .num .arrow {
   color: var(--text-dim);
   font-weight: 500;
   font-style: italic;
   font-size: 24px;
   margin: 0 2px;
 }
-.dash-stat .label {
-  font-size: 10px;
+.grid2-cell .right {
+  display: flex;
+  flex-direction: column;
+}
+.grid2-cell .label {
+  font-size: 11px;
   color: var(--text-dim);
   text-transform: uppercase;
   letter-spacing: 0.8px;
   font-weight: 700;
-  margin-top: 6px;
 }
-.dash-stat .sub {
+.grid2-cell .sub {
   font-size: 11px;
   color: var(--text-soft);
   margin-top: 2px;
@@ -1437,12 +1431,11 @@ footer.site a:hover { color: var(--action); }
   .pricing-head { flex-direction: column; align-items: stretch; }
   .pricing-grid { grid-template-columns: 1fr; }
   .founder-card { grid-template-columns: 1fr; padding: 36px 28px; }
-  .dash-stats { flex-wrap: wrap; gap: 16px; }
-  .dash-stat, .dash-stat:first-child { flex: 1 1 calc(50% - 8px); border-right: none; padding-right: 0; padding-bottom: 8px; }
+  .grid2 { grid-template-columns: 1fr; gap: 10px; }
+  .grid2-cell .num { font-size: 32px; min-width: 64px; }
+  .grid2-cell.hero .num { font-size: 36px; }
   .wave-row { grid-template-columns: 60px 1fr 60px; gap: 10px; }
   .wave-row .duration { font-size: 20px; }
-  .dash-stat .num { font-size: 28px; }
-  .dash-stat .num.hero { font-size: 34px; }
   .dash-header { flex-direction: column; align-items: flex-start; gap: 8px; }
 }
 </style>
@@ -1572,25 +1565,34 @@ footer.site a:hover { color: var(--action); }
         </div>
       </div>
 
-      <div class="dash-stats" style="display:flex;align-items:flex-start;">
-        <div class="dash-stat" style="align-self:flex-start;">
-          <div class="num hero">30<span class="arrow">→</span>22</div>
-          <div class="label">Minutes (saved 7:32)</div>
+      <div class="grid2">
+        <div class="grid2-cell hero">
+          <div class="num">30<span class="arrow">→</span>22</div>
+          <div class="right">
+            <div class="label">Minutes</div>
+            <div class="sub">saved 7:32</div>
+          </div>
         </div>
-        <div class="dash-stat" style="align-self:flex-start;">
+        <div class="grid2-cell">
           <div class="num">124</div>
-          <div class="label">Fillers removed</div>
-          <div class="sub">um · uh · like · you know</div>
+          <div class="right">
+            <div class="label">Fillers removed</div>
+            <div class="sub">um · uh · like · you know</div>
+          </div>
         </div>
-        <div class="dash-stat" style="align-self:flex-start;">
+        <div class="grid2-cell">
           <div class="num">8</div>
-          <div class="label">Long pauses cut</div>
-          <div class="sub">≥ 2.4s · breath / silence</div>
+          <div class="right">
+            <div class="label">Long pauses cut</div>
+            <div class="sub">≥ 2.4s · breath / silence</div>
+          </div>
         </div>
-        <div class="dash-stat" style="align-self:flex-start;">
+        <div class="grid2-cell">
           <div class="num">0</div>
-          <div class="label">Bytes uploaded</div>
-          <div class="sub">on-device, always</div>
+          <div class="right">
+            <div class="label">Bytes uploaded</div>
+            <div class="sub">on-device, always</div>
+          </div>
         </div>
       </div>
     </div>
