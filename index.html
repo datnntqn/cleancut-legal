@@ -1,480 +1,2142 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>CleanCut — Cut, clean, and merge audio on your iPhone</title>
-    <meta
-      name="description"
-      content="CleanCut is an on-device audio editor for iPhone. Trim filler words, denoise background noise, and merge takes — your audio never leaves the phone."
-    />
-    <link rel="stylesheet" href="style.css" />
-    <link rel="icon" type="image/png" href="cleancut-logo.png" />
-    <link rel="apple-touch-icon" href="cleancut-logo.png" />
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>CleanCut — Cut, clean, and merge audio on your iPhone</title>
+<meta
+  name="description"
+  content="CleanCut is an on-device audio editor for iPhone. Trim filler words, denoise background noise, and merge takes — your audio never leaves the phone."
+/>
+<link rel="icon" type="image/png" href="cleancut-logo.png" />
+<link rel="apple-touch-icon" href="cleancut-logo.png" />
 
-    <!-- Open Graph -->
-    <meta property="og:type" content="website" />
-    <meta
-      property="og:title"
-      content="CleanCut — Cut, clean, and merge audio on your iPhone"
-    />
-    <meta
-      property="og:description"
-      content="CleanCut is an on-device audio editor for iPhone. Trim filler words, denoise background noise, and merge takes — your audio never leaves the phone."
-    />
-    <meta
-      property="og:image"
-      content="https://datnntqn.github.io/clearcut-legal/cleancut-logo.png"
-    />
-    <meta
-      property="og:url"
-      content="https://datnntqn.github.io/clearcut-legal/"
-    />
+<!-- Open Graph -->
+<meta property="og:type" content="website" />
+<meta property="og:title" content="CleanCut — Cut, clean, and merge audio on your iPhone" />
+<meta property="og:description" content="CleanCut is an on-device audio editor for iPhone. Trim filler words, denoise background noise, and merge takes — your audio never leaves the phone." />
+<meta property="og:image" content="https://datnntqn.github.io/clearcut-legal/cleancut-logo.png" />
+<meta property="og:url" content="https://datnntqn.github.io/clearcut-legal/" />
 
-    <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary" />
-    <meta
-      name="twitter:title"
-      content="CleanCut — Cut, clean, and merge audio on your iPhone"
-    />
-    <meta
-      name="twitter:description"
-      content="CleanCut is an on-device audio editor for iPhone. Trim filler words, denoise background noise, and merge takes — your audio never leaves the phone."
-    />
-    <meta
-      name="twitter:image"
-      content="https://datnntqn.github.io/clearcut-legal/cleancut-logo.png"
-    />
-  </head>
-  <body>
-    <a class="skip-link" href="#main">Skip to content</a>
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="CleanCut — Cut, clean, and merge audio on your iPhone" />
+<meta name="twitter:description" content="CleanCut is an on-device audio editor for iPhone. Trim filler words, denoise background noise, and merge takes — your audio never leaves the phone." />
+<meta name="twitter:image" content="https://datnntqn.github.io/clearcut-legal/cleancut-logo.png" />
 
-    <header class="site">
-      <div class="inner">
-        <a href="index.html" class="brand">
-          <img
-            src="cleancut-logo.png"
-            alt="CleanCut"
-            class="brand-mark"
-            width="28"
-            height="28"
-          />
-          <span>CleanCut</span>
-        </a>
-        <nav class="site">
-          <a href="index.html" class="active">About</a>
-          <a href="privacy.html">Privacy</a>
-          <a href="terms.html">Terms</a>
-          <a href="support.html">Support</a>
-        </nav>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,700;0,6..72,800;1,6..72,400;1,6..72,500&display=swap" rel="stylesheet">
+
+<style>
+/* ====================================================================
+   FIRE PALETTE — preserved across redesigns (this IS the brand)
+   ==================================================================== */
+:root {
+  --action: #EA580C;
+  --action-hover: #c2470a;
+  --ai: #F0506E;
+  --ember-1: #FF4E50;
+  --ember-2: #F9A66C;
+  --ember-3: #F0506E;
+  --ember-4: #6F2DBD;
+
+  --bg: #FBFBFC;
+  --bg-soft: #ffffff;
+  --bg-warm: #FFF7F1;
+  --bg-cream: #F8F2EA;
+  --bg-dark: #0A0A18;
+  --bg-dark-card: #15172B;
+
+  --text: #1C1C1E;
+  --text-soft: #5a5a63;
+  --text-dim: #9a9aa3;
+
+  --border: #e5e5ea;
+  --border-warm: #f0d8c8;
+
+  --max: 1120px;
+
+  --curve-soft: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --curve-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --curve-exit: cubic-bezier(0.4, 0, 1, 1);
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, sans-serif;
+  font-size: 17px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: var(--action); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  padding: 8px 12px;
+  background: var(--text);
+  color: #fff;
+  z-index: 100;
+}
+.skip-link:focus { left: 8px; top: 8px; }
+
+/* ====================================================================
+   SCROLL REVEAL
+   ==================================================================== */
+.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity .7s var(--curve-soft), transform .7s var(--curve-soft);
+}
+.reveal.is-visible { opacity: 1; transform: translateY(0); }
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1; transform: none; transition: none; }
+}
+
+/* ====================================================================
+   HEADER — brand in serif
+   ==================================================================== */
+header.site {
+  border-bottom: 1px solid var(--border);
+  background: rgba(255,255,255,0.92);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+header.site .inner {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 14px 32px;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: 'Newsreader', Georgia, serif;
+  font-weight: 700;
+  font-size: 20px;
+  color: var(--text);
+  letter-spacing: -0.2px;
+}
+.brand-mark {
+  width: 28px;
+  height: 28px;
+  border-radius: 7px;
+  object-fit: cover;
+}
+nav.site {
+  display: flex;
+  gap: 22px;
+  margin-left: auto;
+  font-size: 15px;
+}
+nav.site a {
+  color: var(--text-soft);
+  font-weight: 500;
+}
+nav.site a.active,
+nav.site a:hover {
+  color: var(--action);
+  text-decoration: none;
+}
+
+/* ====================================================================
+   HERO — full-bleed pulsing waveform, editorial typography
+   ==================================================================== */
+.hero {
+  position: relative;
+  min-height: 88vh;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse 1100px 700px at 70% -100px,
+      rgba(255, 78, 80, 0.10) 0%,
+      rgba(240, 80, 110, 0.04) 40%,
+      transparent 70%),
+    linear-gradient(180deg, var(--bg) 0%, var(--bg-warm) 100%);
+  display: flex;
+  align-items: center;
+  padding: 40px 0 80px;
+}
+.wave-bg {
+  position: absolute;
+  top: 50%; left: 0; right: 0;
+  height: 380px;
+  margin-top: -190px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  padding: 0 4vw;
+  pointer-events: none;
+  opacity: 0.85;
+}
+.wave-bar {
+  width: 4px;
+  background: linear-gradient(180deg,
+    rgba(255, 78, 80, 0.40) 0%,
+    rgba(240, 80, 110, 0.55) 40%,
+    rgba(111, 45, 189, 0.45) 100%);
+  border-radius: 4px;
+  flex: 1 1 0;
+  max-width: 6px;
+  transition: height 2.4s var(--curve-soft);
+}
+
+.hero-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  width: 100%;
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: 64px;
+  align-items: center;
+  padding: 0 48px;
+}
+
+.hero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--ai);
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  margin-bottom: 24px;
+}
+.hero-eyebrow::before {
+  content: "";
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--ai);
+  animation: pulse 2.4s var(--curve-soft) infinite;
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.8); }
+}
+
+.hero-headline {
+  font-family: 'Newsreader', Georgia, serif;
+  font-weight: 700;
+  color: var(--text);
+  margin: 0 0 28px;
+  letter-spacing: -1.5px;
+  line-height: 0.95;
+}
+.hero-headline .h-big {
+  display: block;
+  font-size: clamp(54px, 7vw, 96px);
+  font-weight: 800;
+}
+.hero-headline .h-med {
+  display: block;
+  font-size: clamp(38px, 4.5vw, 60px);
+  font-weight: 500;
+  font-style: italic;
+  color: var(--text-soft);
+  margin-top: 4px;
+}
+.hero-headline .h-last {
+  display: block;
+  font-size: clamp(54px, 7vw, 96px);
+  font-weight: 800;
+  margin-top: 8px;
+}
+.gradient-word {
+  background: linear-gradient(95deg,
+    var(--ember-1) 0%,
+    var(--ember-2) 40%,
+    var(--ember-3) 70%,
+    var(--ember-4) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hero-lede {
+  font-size: 19px;
+  color: var(--text-soft);
+  margin: 0 0 32px;
+  line-height: 1.55;
+  max-width: 460px;
+}
+.hero-cta-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 16px;
+  margin-bottom: 14px;
+}
+.cta-primary {
+  display: inline-block;
+  background: var(--text);
+  color: #fff;
+  padding: 15px 30px;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 15px;
+  box-shadow: 0 2px 6px rgba(28, 28, 30, 0.10);
+  transition: background .2s var(--curve-soft), transform .2s var(--curve-soft);
+}
+.cta-primary:hover {
+  background: #000;
+  transform: translateY(-1px);
+  text-decoration: none;
+}
+.hero-disclaimer {
+  font-size: 13px;
+  color: var(--text-dim);
+  margin: 14px 0 0;
+}
+
+/* ── Phone — witness role, cursor tilt ─────────────────────────── */
+.hero-phone {
+  display: flex;
+  justify-content: center;
+  perspective: 1400px;
+}
+.phone-frame {
+  width: 260px;
+  height: 540px;
+  background: #0a0a18;
+  border-radius: 40px;
+  padding: 11px;
+  box-shadow:
+    0 0 0 1.5px #1a1a24,
+    0 32px 60px -22px rgba(15, 15, 28, 0.32);
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform .25s var(--curve-soft);
+  will-change: transform;
+}
+.phone-notch {
+  position: absolute;
+  top: 14px; left: 50%; transform: translateX(-50%);
+  width: 84px; height: 22px;
+  background: #0a0a18;
+  border-radius: 999px;
+  z-index: 2;
+}
+.phone-screen {
+  width: 100%; height: 100%;
+  background: var(--bg);
+  border-radius: 32px;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+.phone-status {
+  padding: 14px 22px 6px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--text);
+}
+.phone-nav {
+  padding: 10px 16px 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid rgba(0,0,0,0.05);
+}
+.phone-nav .back, .phone-nav .edit { font-size: 10px; color: var(--action); }
+.phone-nav .title {
+  font-family: 'Newsreader', Georgia, serif;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: -0.2px;
+}
+
+.phone-content {
+  padding: 10px 12px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
+  min-height: 0;
+}
+.phone-summary {
+  background: var(--text);
+  color: #fff;
+  border-radius: 12px;
+  padding: 12px;
+}
+.phone-summary .row {
+  display: flex; justify-content: space-between; align-items: baseline;
+  font-size: 8px; opacity: .7;
+  text-transform: uppercase; letter-spacing: 0.6px; font-weight: 700;
+}
+.phone-summary .saved {
+  font-family: 'Newsreader', Georgia, serif;
+  font-size: 32px; font-weight: 800; line-height: 1;
+  margin-top: 4px;
+  letter-spacing: -1px;
+  font-variant-numeric: tabular-nums;
+}
+.phone-summary .chips { display: flex; gap: 4px; margin-top: 8px; }
+.phone-summary .chip {
+  font-size: 8px;
+  padding: 2px 6px;
+  border-radius: 999px;
+  font-weight: 700;
+  background: rgba(255,255,255,0.14);
+}
+
+.phone-transcript {
+  background: var(--bg-soft);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 10px;
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.transcript-status {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  font-weight: 700;
+  color: var(--text-dim);
+}
+.transcript-status .dot {
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: var(--text-dim);
+  transition: background .3s;
+}
+.transcript-status.analyzing { color: var(--ai); }
+.transcript-status.analyzing .dot {
+  background: var(--ai);
+  animation: pulse-fast 1.1s var(--curve-soft) infinite;
+}
+.transcript-status.cutting { color: var(--action); }
+.transcript-status.cutting .dot {
+  background: var(--action);
+  animation: pulse-fast 0.6s var(--curve-soft) infinite;
+}
+.transcript-status.done { color: #2BAA61; }
+.transcript-status.done .dot { background: #2BAA61; }
+@keyframes pulse-fast {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.3; transform: scale(0.7); }
+}
+.transcript-body {
+  font-size: 12px;
+  line-height: 1.55;
+  color: var(--text);
+  font-weight: 500;
+  flex: 1;
+}
+.transcript-body .w {
+  display: inline-block;
+  margin-right: 3px;
+  position: relative;
+  transition:
+    color .3s var(--curve-soft),
+    background-color .3s var(--curve-soft),
+    max-width .45s var(--curve-exit),
+    margin .45s var(--curve-exit),
+    padding .45s var(--curve-exit),
+    opacity .35s var(--curve-exit),
+    transform .45s var(--curve-spring);
+  max-width: 200px;
+  overflow: hidden;
+  vertical-align: baseline;
+}
+.transcript-body .w.filler,
+.transcript-body .w.pause {
+  color: var(--ai);
+  background: rgba(240, 80, 110, 0.10);
+  padding: 1px 4px;
+  border-radius: 3px;
+  margin-left: -1px;
+  font-weight: 600;
+}
+.transcript-body .w.pause {
+  color: var(--ember-4);
+  background: rgba(111, 45, 189, 0.10);
+  font-style: italic;
+  font-size: 10px;
+}
+.transcript-body .w.striking {
+  text-decoration: line-through;
+  text-decoration-color: var(--ai);
+  text-decoration-thickness: 2px;
+  color: var(--text-dim);
+}
+.transcript-body .w.removing {
+  max-width: 0;
+  margin: 0;
+  padding: 0;
+  opacity: 0;
+  transform: translateY(-4px);
+}
+.phone-bottom-cta {
+  margin: 0;
+  padding: 10px;
+  background: var(--action);
+  color: #fff;
+  text-align: center;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  border-radius: 999px;
+}
+.replay-button {
+  position: absolute;
+  bottom: 18px; right: 18px;
+  background: rgba(255,255,255,0.95);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 6px 12px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .4s var(--curve-soft), transform .4s var(--curve-soft);
+  transform: translateY(6px);
+  z-index: 3;
+  font-family: inherit;
+}
+.replay-button.visible {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+/* ====================================================================
+   TRANSITION SECTION — dashboard-card with before/after waveforms
+   ==================================================================== */
+.transition {
+  background: var(--bg-cream);
+  padding: 96px 24px;
+  border-top: 1px solid var(--border-warm);
+  border-bottom: 1px solid var(--border-warm);
+}
+.transition-inner {
+  max-width: 1080px;
+  margin: 0 auto;
+}
+.transition-head { margin-bottom: 40px; }
+.transition-eyebrow {
+  font-size: 12px;
+  color: var(--ai);
+  font-weight: 700;
+  letter-spacing: 1.6px;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+.transition-title {
+  font-family: 'Newsreader', Georgia, serif;
+  font-size: clamp(36px, 4.6vw, 52px);
+  font-weight: 700;
+  letter-spacing: -1px;
+  line-height: 1.05;
+  margin: 0;
+  max-width: 820px;
+}
+.transition-title em {
+  font-style: italic;
+  font-weight: 500;
+  color: var(--text-soft);
+}
+
+.dash {
+  background: linear-gradient(168deg, #ffffff 0%, var(--bg-warm) 100%);
+  border: 1px solid var(--border-warm);
+  border-radius: 24px;
+  padding: 32px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 24px 56px -28px rgba(28, 28, 30, 0.12);
+}
+.dash::after {
+  content: "";
+  position: absolute;
+  top: -120px; right: -120px;
+  width: 360px; height: 360px;
+  background: radial-gradient(circle, rgba(240, 80, 110, 0.12) 0%, transparent 65%);
+  pointer-events: none;
+}
+.dash-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 20px;
+  border-bottom: 1px solid rgba(28, 28, 30, 0.08);
+  margin-bottom: 28px;
+  position: relative;
+  z-index: 1;
+}
+.dash-header .left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.dash-header h3 {
+  font-family: 'Newsreader', Georgia, serif;
+  font-size: 20px;
+  font-weight: 700;
+  margin: 0;
+  letter-spacing: -0.3px;
+}
+.dash-header .badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  color: #2BAA61;
+  background: rgba(43, 170, 97, 0.10);
+  padding: 4px 10px;
+  border-radius: 999px;
+}
+.dash-header .badge::before {
+  content: "";
+  width: 6px; height: 6px;
+  background: #2BAA61;
+  border-radius: 50%;
+  animation: pulse-tiny 1.6s infinite;
+}
+@keyframes pulse-tiny {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+.dash-header .meta {
+  font-family: ui-monospace, "SF Mono", Menlo, monospace;
+  font-size: 12px;
+  color: var(--text-dim);
+}
+.wave-block { position: relative; z-index: 1; }
+.wave-row {
+  display: grid;
+  grid-template-columns: 96px 1fr 96px;
+  gap: 20px;
+  align-items: center;
+  padding: 14px 0;
+}
+.wave-row + .wave-row { border-top: 1px dashed rgba(28, 28, 30, 0.08); }
+.wave-row .label {
+  font-size: 11px;
+  color: var(--text-soft);
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  font-weight: 700;
+}
+.wave-row .duration {
+  font-family: 'Newsreader', Georgia, serif;
+  font-size: 30px;
+  font-weight: 800;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.6px;
+}
+.wave-row.before .duration { color: var(--text-dim); }
+.wave-row.after .duration { color: var(--action); }
+.wave-strip {
+  height: 56px;
+  display: flex;
+  align-items: center;
+  gap: 1.5px;
+}
+.wave-strip .b {
+  flex: 1 1 0;
+  background: rgba(28, 28, 30, 0.55);
+  border-radius: 1.5px;
+}
+.wave-row.before .b.cut {
+  background: var(--ai);
+  opacity: 0.9;
+}
+.wave-row.after .b { background: var(--text); }
+.wave-row.after .empty-tail {
+  flex: 0 0 27%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  color: var(--action);
+  font-weight: 700;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  border-left: 2px dashed rgba(234, 88, 12, 0.45);
+  margin-left: 6px;
+}
+.dash-stats {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr 1fr 1fr;
+  gap: 28px;
+  margin-top: 36px;
+  padding-top: 28px;
+  border-top: 1px solid rgba(28, 28, 30, 0.08);
+  position: relative;
+  z-index: 1;
+}
+.dash-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding-right: 24px;
+  border-right: 1px solid rgba(28, 28, 30, 0.06);
+}
+.dash-stat:last-child { border-right: none; padding-right: 0; }
+.dash-stat .num {
+  font-family: 'Newsreader', Georgia, serif;
+  font-size: 44px;
+  font-weight: 800;
+  letter-spacing: -1.2px;
+  font-variant-numeric: tabular-nums;
+  line-height: 0.95;
+  color: var(--text);
+}
+.dash-stat .num.hero {
+  font-size: 54px;
+  color: var(--action);
+}
+.dash-stat .num .arrow {
+  color: var(--text-dim);
+  font-weight: 500;
+  font-style: italic;
+  font-size: 32px;
+  margin: 0 4px;
+}
+.dash-stat .label {
+  font-size: 11px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  font-weight: 700;
+  margin-top: 4px;
+}
+.dash-stat .sub {
+  font-size: 12px;
+  color: var(--text-soft);
+  margin-top: 2px;
+  font-family: ui-monospace, monospace;
+}
+.transition-foot {
+  margin: 28px auto 0;
+  text-align: center;
+  font-size: 13px;
+  color: var(--text-dim);
+  max-width: 760px;
+  font-style: italic;
+  font-family: 'Newsreader', Georgia, serif;
+}
+
+/* ====================================================================
+   FEATURES
+   ==================================================================== */
+.features {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 96px 32px 32px;
+}
+.features h2 {
+  font-family: 'Newsreader', Georgia, serif;
+  font-size: clamp(36px, 4.5vw, 56px);
+  font-weight: 800;
+  margin: 0 0 12px;
+  letter-spacing: -1px;
+  line-height: 1.05;
+}
+.features h2 em {
+  font-style: italic;
+  font-weight: 500;
+  color: var(--text-soft);
+}
+.features-sub {
+  font-size: 17px;
+  color: var(--text-soft);
+  margin: 0 0 48px;
+  max-width: 540px;
+  line-height: 1.55;
+}
+.features-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 18px;
+}
+@media (min-width: 820px) {
+  .features-grid {
+    grid-template-columns: 1.5fr 1fr;
+    grid-template-rows: auto auto;
+  }
+}
+.feature-big {
+  grid-row: 1 / span 2;
+  background: linear-gradient(165deg, var(--bg-warm) 0%, #ffffff 70%);
+  border: 1px solid var(--border-warm);
+  border-radius: 22px;
+  padding: 36px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  position: relative;
+  overflow: hidden;
+}
+.feature-big::after {
+  content: "";
+  position: absolute;
+  top: -80px; right: -80px;
+  width: 260px; height: 260px;
+  background: radial-gradient(circle, rgba(240, 80, 110, 0.16) 0%, transparent 65%);
+  pointer-events: none;
+}
+.feat-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--ai);
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  position: relative;
+  z-index: 1;
+}
+.feature-big h3 {
+  font-family: 'Newsreader', Georgia, serif;
+  font-size: 36px;
+  margin: 0;
+  font-weight: 800;
+  letter-spacing: -0.8px;
+  position: relative;
+  z-index: 1;
+}
+.feature-big p {
+  margin: 0;
+  font-size: 15px;
+  color: var(--text-soft);
+  line-height: 1.65;
+  max-width: 400px;
+  position: relative;
+  z-index: 1;
+}
+.feat-meta {
+  display: flex;
+  gap: 36px;
+  margin-top: auto;
+  padding-top: 12px;
+  position: relative;
+  z-index: 1;
+}
+.feat-stat-num {
+  font-family: 'Newsreader', Georgia, serif;
+  font-size: 36px;
+  font-weight: 800;
+  color: var(--text);
+  letter-spacing: -0.8px;
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+}
+.feat-stat-label {
+  font-size: 11px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  margin-top: 6px;
+}
+.feat-icon {
+  width: 36px; height: 36px;
+  display: grid;
+  place-items: center;
+  color: var(--action);
+}
+.feature-big .feat-icon { color: var(--action); }
+.feature-small .feat-icon { color: var(--text); }
+
+.icon-cut {
+  width: 22px; height: 22px;
+  position: relative;
+}
+.icon-cut::before, .icon-cut::after {
+  content: "";
+  position: absolute;
+  background: currentColor;
+  border-radius: 1px;
+  width: 16px; height: 2px;
+  top: 10px; left: 3px;
+}
+.icon-cut::before { transform: rotate(-30deg); }
+.icon-cut::after { transform: rotate(30deg); }
+.icon-wave {
+  display: inline-flex;
+  align-items: end;
+  gap: 2px;
+  height: 22px;
+}
+.icon-wave span {
+  width: 3px;
+  background: currentColor;
+  border-radius: 1px;
+}
+.icon-wave span:nth-child(1) { height: 8px; }
+.icon-wave span:nth-child(2) { height: 16px; }
+.icon-wave span:nth-child(3) { height: 12px; }
+.icon-wave span:nth-child(4) { height: 20px; }
+.icon-wave span:nth-child(5) { height: 6px; }
+.icon-merge {
+  width: 22px; height: 22px;
+  position: relative;
+}
+.icon-merge::before, .icon-merge::after {
+  content: "";
+  position: absolute;
+  width: 14px; height: 2px;
+  background: currentColor;
+  border-radius: 1px;
+  left: 4px;
+}
+.icon-merge::before { top: 7px; }
+.icon-merge::after { top: 13px; }
+
+.feature-small {
+  background: var(--bg-soft);
+  border: 1px solid var(--border);
+  border-radius: 22px;
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.feature-small h3 {
+  font-family: 'Newsreader', Georgia, serif;
+  font-size: 22px;
+  margin: 0;
+  font-weight: 700;
+  letter-spacing: -0.4px;
+}
+.feature-small p {
+  margin: 0;
+  font-size: 14px;
+  color: var(--text-soft);
+  line-height: 1.6;
+}
+
+/* ====================================================================
+   PRIVACY MOAT
+   ==================================================================== */
+.moat {
+  background: linear-gradient(135deg, var(--bg-dark) 0%, var(--bg-dark-card) 100%);
+  color: rgba(255,255,255,0.92);
+  margin: 96px 0 0;
+  padding: 96px 24px;
+  position: relative;
+  overflow: hidden;
+}
+.moat::before {
+  content: "";
+  position: absolute;
+  top: -120px; right: -120px;
+  width: 520px; height: 520px;
+  background: radial-gradient(circle, rgba(240, 80, 110, 0.20) 0%, transparent 60%);
+  pointer-events: none;
+}
+.moat-inner {
+  max-width: var(--max);
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 40px;
+}
+@media (min-width: 820px) {
+  .moat-inner { grid-template-columns: 1.2fr 1fr; gap: 56px; align-items: start; }
+}
+.moat-eyebrow {
+  font-size: 12px;
+  color: var(--ai);
+  font-weight: 700;
+  letter-spacing: 1.6px;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+.moat h2 {
+  font-family: 'Newsreader', Georgia, serif;
+  color: #fff;
+  font-size: clamp(34px, 4.2vw, 52px);
+  margin: 0 0 28px;
+  letter-spacing: -0.8px;
+  font-weight: 800;
+  line-height: 1.05;
+}
+.moat h2 em {
+  font-style: italic;
+  font-weight: 500;
+  color: var(--ember-2);
+}
+.moat p {
+  color: rgba(255,255,255,0.78);
+  margin: 0 0 16px;
+  line-height: 1.7;
+  font-size: 16px;
+}
+.moat strong { color: #fff; font-weight: 600; }
+
+.proof-panel {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.10);
+  border-radius: 20px;
+  padding: 28px;
+}
+.proof-label {
+  font-size: 11px;
+  color: rgba(255,255,255,0.55);
+  text-transform: uppercase;
+  letter-spacing: 1.4px;
+  font-weight: 700;
+  margin-bottom: 14px;
+}
+.proof-stat {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  margin-bottom: 20px;
+}
+.proof-num {
+  font-family: 'Newsreader', Georgia, serif;
+  font-size: 88px;
+  font-weight: 800;
+  letter-spacing: -2px;
+  color: #fff;
+  line-height: 0.9;
+  font-variant-numeric: tabular-nums;
+}
+.proof-unit {
+  font-size: 17px;
+  color: rgba(255,255,255,0.65);
+  font-weight: 500;
+}
+.proof-feed {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-height: 132px;
+}
+.proof-row {
+  display: grid;
+  grid-template-columns: 64px 1fr auto;
+  gap: 12px;
+  align-items: center;
+  font-size: 12px;
+  font-family: ui-monospace, "SF Mono", Menlo, monospace;
+  color: rgba(255,255,255,0.78);
+  opacity: 0;
+  transform: translateY(8px);
+  animation: feed-in .5s var(--curve-soft) forwards;
+}
+@keyframes feed-in {
+  to { opacity: 1; transform: translateY(0); }
+}
+.proof-time { color: rgba(255,255,255,0.45); }
+.proof-action { color: #fff; }
+.proof-result {
+  color: #2BAA61;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.proof-result::before {
+  content: "";
+  width: 6px; height: 6px;
+  background: #2BAA61;
+  border-radius: 50%;
+  animation: pulse-tiny 1.6s infinite;
+}
+
+/* ====================================================================
+   PRICING
+   ==================================================================== */
+.pricing {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 96px 32px 32px;
+}
+.pricing-head {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 24px;
+  margin-bottom: 40px;
+}
+.pricing h2 {
+  font-family: 'Newsreader', Georgia, serif;
+  font-size: clamp(36px, 4.5vw, 56px);
+  margin: 0;
+  font-weight: 800;
+  letter-spacing: -1px;
+  line-height: 1.05;
+}
+.pricing h2 em {
+  font-style: italic;
+  font-weight: 500;
+  color: var(--text-soft);
+}
+.pricing-sub {
+  color: var(--text-soft);
+  font-size: 16px;
+  margin: 8px 0 0;
+}
+.billing-toggle {
+  display: inline-flex;
+  background: #f1f1f4;
+  border-radius: 999px;
+  padding: 4px;
+  gap: 2px;
+}
+.billing-toggle button {
+  border: none;
+  background: transparent;
+  font: inherit;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 9px 18px;
+  border-radius: 999px;
+  cursor: pointer;
+  color: var(--text-soft);
+  transition: background .2s var(--curve-soft), color .2s var(--curve-soft);
+}
+.billing-toggle button.active {
+  background: #fff;
+  color: var(--text);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+}
+.save-tag {
+  font-size: 10px;
+  color: var(--ai);
+  margin-left: 4px;
+  font-weight: 700;
+}
+.pricing-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 18px;
+}
+@media (min-width: 720px) {
+  .pricing-grid { grid-template-columns: 1fr 1.15fr; align-items: stretch; }
+}
+.tier {
+  border-radius: 22px;
+  padding: 36px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.tier.free {
+  background: var(--bg-soft);
+  border: 1px solid var(--border);
+}
+.tier.pro {
+  background: linear-gradient(160deg, #1C1C1E 0%, #2A1A2E 100%);
+  color: #fff;
+  position: relative;
+  overflow: hidden;
+}
+.tier.pro::before {
+  content: "";
+  position: absolute;
+  top: -80px; left: -80px;
+  width: 280px; height: 280px;
+  background: radial-gradient(circle, rgba(240, 80, 110, 0.18) 0%, transparent 65%);
+  pointer-events: none;
+}
+.tier-label {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--text-dim);
+}
+.tier.pro .tier-label { color: var(--ai); }
+.tier-price-row {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+}
+.tier-price {
+  font-family: 'Newsreader', Georgia, serif;
+  font-size: 56px;
+  font-weight: 800;
+  letter-spacing: -2px;
+  line-height: 0.9;
+  font-variant-numeric: tabular-nums;
+}
+.tier-period {
+  font-size: 14px;
+  color: var(--text-dim);
+}
+.tier.pro .tier-period { color: rgba(255,255,255,0.6); }
+.tier-note {
+  font-size: 13px;
+  color: var(--text-dim);
+  margin: 0;
+}
+.tier.pro .tier-note { color: rgba(255,255,255,0.65); }
+.tier-list {
+  list-style: none;
+  padding: 0;
+  margin: 8px 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex: 1;
+}
+.tier-list li {
+  font-size: 14px;
+  display: flex;
+  align-items: start;
+  gap: 10px;
+  line-height: 1.5;
+}
+.tier-list .check {
+  flex-shrink: 0;
+  width: 16px; height: 16px;
+  margin-top: 2px;
+  color: var(--action);
+}
+.tier.pro .tier-list .check { color: var(--ember-2); }
+.tier-list .x {
+  flex-shrink: 0;
+  width: 16px; height: 16px;
+  margin-top: 2px;
+  color: var(--text-dim);
+  opacity: 0.5;
+}
+.tier-cta {
+  display: block;
+  text-align: center;
+  padding: 14px;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 15px;
+  margin-top: 8px;
+  transition: background .2s var(--curve-soft), color .2s var(--curve-soft), border-color .2s var(--curve-soft);
+}
+.tier.free .tier-cta {
+  background: transparent;
+  color: var(--text);
+  border: 1.5px solid var(--border);
+}
+.tier.free .tier-cta:hover {
+  border-color: var(--action);
+  color: var(--action);
+  text-decoration: none;
+}
+.tier.pro .tier-cta {
+  background: var(--action);
+  color: #fff;
+}
+.tier.pro .tier-cta:hover {
+  background: var(--action-hover);
+  text-decoration: none;
+}
+.pricing-foot {
+  text-align: center;
+  font-size: 12px;
+  color: var(--text-dim);
+  margin-top: 24px;
+}
+
+/* ====================================================================
+   FAQ — italic serif opener
+   ==================================================================== */
+.faq {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 96px 32px 32px;
+}
+.faq h2 {
+  font-family: 'Newsreader', Georgia, serif;
+  font-size: clamp(48px, 6vw, 80px);
+  margin: 0 0 32px;
+  font-weight: 800;
+  letter-spacing: -1.5px;
+  line-height: 1;
+}
+.faq h2 em {
+  font-style: italic;
+  font-weight: 500;
+  color: var(--text-soft);
+}
+.faq details {
+  border-bottom: 1px solid var(--border);
+}
+.faq summary {
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 17px;
+  padding: 20px 0;
+  list-style: none;
+  position: relative;
+  padding-right: 32px;
+}
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary::after {
+  content: "+";
+  position: absolute;
+  right: 0; top: 16px;
+  font-size: 24px;
+  font-weight: 300;
+  color: var(--text-soft);
+}
+.faq details[open] summary::after { content: "−"; top: 13px; }
+.faq details p {
+  margin: 0;
+  padding: 0 16px 20px 0;
+  color: var(--text-soft);
+  font-size: 15px;
+  line-height: 1.65;
+}
+
+/* ====================================================================
+   FOUNDER — serif quote with pull-quote
+   ==================================================================== */
+.founder {
+  max-width: var(--max);
+  margin: 64px auto 0;
+  padding: 64px 32px 80px;
+}
+.founder-card {
+  background: var(--bg-warm);
+  border: 1px solid var(--border-warm);
+  border-radius: 28px;
+  padding: 64px 56px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+}
+@media (min-width: 720px) {
+  .founder-card { grid-template-columns: 1fr 2.2fr; gap: 56px; align-items: start; }
+}
+.founder-meta { display: flex; flex-direction: column; gap: 4px; }
+.founder-avatar {
+  width: 64px; height: 64px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--action), var(--ai));
+  display: grid;
+  place-items: center;
+  color: #fff;
+  font-family: 'Newsreader', Georgia, serif;
+  font-weight: 800;
+  font-size: 28px;
+  margin-bottom: 14px;
+}
+.founder-name {
+  font-family: 'Newsreader', Georgia, serif;
+  font-weight: 700;
+  font-size: 18px;
+}
+.founder-handle {
+  font-size: 13px;
+  color: var(--text-soft);
+}
+.founder-quote {
+  font-family: 'Newsreader', Georgia, serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: 22px;
+  line-height: 1.55;
+  color: var(--text);
+}
+.founder-quote p { margin: 0 0 18px; }
+.founder-quote p:last-child { margin-bottom: 0; }
+.founder-quote em {
+  font-style: italic;
+  color: var(--action);
+  font-weight: 500;
+}
+.founder-quote .pull {
+  display: block;
+  font-size: 32px;
+  line-height: 1.25;
+  color: var(--text);
+  font-weight: 500;
+  margin: 24px 0;
+  padding-left: 24px;
+  border-left: 3px solid var(--ember-2);
+  font-style: italic;
+}
+.founder-contact {
+  margin-top: 24px;
+  font-family: 'DM Sans', sans-serif;
+  font-style: normal;
+  font-size: 14px;
+}
+.founder-contact a { color: var(--action); }
+
+/* ====================================================================
+   FOOTER
+   ==================================================================== */
+footer.site {
+  border-top: 1px solid var(--border);
+  padding: 36px 24px 56px;
+  text-align: center;
+  color: var(--text-soft);
+  font-size: 13px;
+}
+footer.site a {
+  color: var(--text-soft);
+  margin: 0 4px;
+}
+footer.site a:hover { color: var(--action); }
+
+/* ====================================================================
+   RESPONSIVE
+   ==================================================================== */
+@media (max-width: 820px) {
+  .hero-inner { grid-template-columns: 1fr; padding: 0 24px; }
+  .hero-phone { justify-content: flex-start; margin-top: 32px; }
+  .features-grid { grid-template-columns: 1fr; }
+  .feature-big { grid-row: auto; }
+  .pricing-head { flex-direction: column; align-items: stretch; }
+  .pricing-grid { grid-template-columns: 1fr; }
+  .founder-card { grid-template-columns: 1fr; padding: 36px 28px; }
+  .dash-stats { grid-template-columns: 1fr 1fr; gap: 20px; }
+  .dash-stat { border-right: none; padding-right: 0; padding-bottom: 12px; }
+  .wave-row { grid-template-columns: 72px 1fr 72px; gap: 12px; }
+  .wave-row .duration { font-size: 22px; }
+  .dash-stat .num { font-size: 36px; }
+  .dash-stat .num.hero { font-size: 44px; }
+  .dash-header { flex-direction: column; align-items: flex-start; gap: 8px; }
+}
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site">
+  <div class="inner">
+    <a href="index.html" class="brand">
+      <img src="cleancut-logo.png" alt="CleanCut" class="brand-mark" width="28" height="28" />
+      <span>CleanCut</span>
+    </a>
+    <nav class="site">
+      <a href="index.html" class="active">About</a>
+      <a href="privacy.html">Privacy</a>
+      <a href="terms.html">Terms</a>
+      <a href="support.html">Support</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+<!-- ================================================================ -->
+<!-- HERO                                                             -->
+<!-- ================================================================ -->
+<section class="hero">
+  <div class="wave-bg" id="waveBg"></div>
+  <div class="hero-inner">
+    <div class="hero-text">
+      <div class="hero-eyebrow">A 30-min recording → a 22-min edit</div>
+      <h1 class="hero-headline">
+        <span class="h-big">Cut filler.</span>
+        <span class="h-med">Clean noise. Merge takes.</span>
+        <span class="h-last">All on your <span class="gradient-word">phone.</span></span>
+      </h1>
+      <p class="hero-lede">
+        An on-device audio editor for podcasters. Your audio never
+        leaves the phone — there's no server to send it to.
+      </p>
+      <div class="hero-cta-row">
+        <a class="cta-primary" href="#">Get on App Store →</a>
       </div>
-    </header>
+      <p class="hero-disclaimer">
+        7-day free trial · $19.99/yr or $39.99 lifetime · App Store link
+        goes live at launch.
+      </p>
+    </div>
 
-    <main id="main">
-      <!-- ======================================================== -->
-      <!-- Section 2: Hero with phone-frame                          -->
-      <!-- ======================================================== -->
-      <section class="hero">
-        <div class="hero-text">
-          <div class="hero-eyebrow">A 30-min recording → 22-min edit</div>
-          <h1 class="hero-headline">
-            Cut filler words.<br />
-            Clean noise. Merge takes.<br />
-            <span class="ai-gradient-text">All on your iPhone.</span>
-          </h1>
-          <p class="hero-lede">
-            An on-device audio editor for podcasters. Your audio never leaves
-            your phone.
-          </p>
-          <a class="cta" href="#">Get on App Store →</a>
-          <p class="cta-disclaimer">
-            7-day free trial · $19.99/yr or $39.99 lifetime · App Store link
-            goes live at launch.
-          </p>
-        </div>
-
-        <div class="hero-phone-wrap">
-          <div class="phone-frame">
-            <div class="phone-notch"></div>
-            <div class="phone-screen">
-              <div class="phone-status">
-                <span>9:41</span>
-                <span>▮▮▮▯ 98%</span>
+    <div class="hero-phone" id="heroPhoneStage">
+      <div class="phone-frame" id="phoneFrame">
+        <div class="phone-notch"></div>
+        <div class="phone-screen">
+          <div class="phone-status">
+            <span>9:41</span>
+            <span>▮▮▮▯ 98%</span>
+          </div>
+          <div class="phone-nav">
+            <span class="back">‹ Sessions</span>
+            <span class="title">Smart Cut</span>
+            <span class="edit">Edit</span>
+          </div>
+          <div class="phone-content">
+            <div class="phone-summary">
+              <div class="row">
+                <span>Saved this session</span>
+                <span id="sessionLabel">30 min</span>
               </div>
-              <div class="phone-nav">
-                <span class="back">‹ Sessions</span>
-                <span class="title">Smart Cut</span>
-                <span class="edit">Edit</span>
+              <div class="saved"><span id="sessionSaved">0:00</span></div>
+              <div class="chips">
+                <span class="chip"><span id="chipFillers">0</span> fillers</span>
+                <span class="chip"><span id="chipPauses">0</span> pauses</span>
               </div>
-
-              <div class="phone-card summary">
-                <div class="row">
-                  <span class="label">Saved</span>
-                  <span class="meta">in 90s</span>
-                </div>
-                <div class="big-num">
-                  <span class="ai-gradient-text">7:32</span>
-                </div>
-                <div class="phone-chips">
-                  <span class="chip chip-ai">124 fillers</span>
-                  <span class="chip chip-action">8 pauses</span>
-                </div>
-              </div>
-
-              <div class="phone-card">
-                <div class="card-label">Waveform</div>
-                <svg
-                  viewBox="0 0 220 50"
-                  style="width: 100%; height: 50px; display: block"
-                >
-                  <g fill="#1C1C1E" opacity="0.85">
-                    <rect x="2" y="20" width="2" height="10" rx="1" />
-                    <rect x="6" y="15" width="2" height="20" rx="1" />
-                    <rect x="10" y="18" width="2" height="14" rx="1" />
-                    <rect x="14" y="10" width="2" height="30" rx="1" />
-                    <rect x="18" y="13" width="2" height="24" rx="1" />
-                    <rect x="22" y="8" width="2" height="34" rx="1" />
-                    <rect x="26" y="16" width="2" height="18" rx="1" />
-                    <rect x="30" y="22" width="2" height="6" rx="1" />
-                    <rect x="34" y="20" width="2" height="10" rx="1" />
-                    <rect x="38" y="12" width="2" height="26" rx="1" />
-                    <rect x="42" y="9" width="2" height="32" rx="1" />
-                    <rect x="46" y="15" width="2" height="20" rx="1" />
-                    <rect x="50" y="18" width="2" height="14" rx="1" />
-                    <rect x="54" y="22" width="2" height="6" rx="1" />
-                    <rect x="58" y="20" width="2" height="10" rx="1" />
-                    <rect x="62" y="14" width="2" height="22" rx="1" />
-                    <rect x="66" y="11" width="2" height="28" rx="1" />
-                    <rect x="70" y="8" width="2" height="34" rx="1" />
-                    <rect x="74" y="13" width="2" height="24" rx="1" />
-                    <rect x="78" y="16" width="2" height="18" rx="1" />
-                    <rect x="82" y="20" width="2" height="10" rx="1" />
-                    <rect x="86" y="22" width="2" height="6" rx="1" />
-                    <rect x="90" y="17" width="2" height="16" rx="1" />
-                    <rect x="94" y="12" width="2" height="26" rx="1" />
-                    <rect x="98" y="9" width="2" height="32" rx="1" />
-                    <rect x="102" y="14" width="2" height="22" rx="1" />
-                    <rect x="106" y="18" width="2" height="14" rx="1" />
-                    <rect x="110" y="21" width="2" height="8" rx="1" />
-                    <rect x="114" y="19" width="2" height="12" rx="1" />
-                    <rect x="118" y="13" width="2" height="24" rx="1" />
-                    <rect x="122" y="10" width="2" height="30" rx="1" />
-                    <rect x="126" y="15" width="2" height="20" rx="1" />
-                    <rect x="130" y="18" width="2" height="14" rx="1" />
-                    <rect x="134" y="22" width="2" height="6" rx="1" />
-                    <rect x="138" y="20" width="2" height="10" rx="1" />
-                    <rect x="142" y="12" width="2" height="26" rx="1" />
-                    <rect x="146" y="9" width="2" height="32" rx="1" />
-                    <rect x="150" y="15" width="2" height="20" rx="1" />
-                    <rect x="154" y="18" width="2" height="14" rx="1" />
-                    <rect x="158" y="22" width="2" height="6" rx="1" />
-                    <rect x="162" y="20" width="2" height="10" rx="1" />
-                    <rect x="166" y="14" width="2" height="22" rx="1" />
-                    <rect x="170" y="11" width="2" height="28" rx="1" />
-                    <rect x="174" y="8" width="2" height="34" rx="1" />
-                    <rect x="178" y="13" width="2" height="24" rx="1" />
-                    <rect x="182" y="16" width="2" height="18" rx="1" />
-                    <rect x="186" y="20" width="2" height="10" rx="1" />
-                    <rect x="190" y="22" width="2" height="6" rx="1" />
-                    <rect x="194" y="17" width="2" height="16" rx="1" />
-                    <rect x="198" y="12" width="2" height="26" rx="1" />
-                    <rect x="202" y="9" width="2" height="32" rx="1" />
-                    <rect x="206" y="14" width="2" height="22" rx="1" />
-                    <rect x="210" y="18" width="2" height="14" rx="1" />
-                    <rect x="214" y="21" width="2" height="8" rx="1" />
-                  </g>
-                  <rect
-                    x="26"
-                    y="22"
-                    width="14"
-                    height="6"
-                    fill="#F0506E"
-                    opacity="0.85"
-                    rx="1"
-                  />
-                  <rect
-                    x="78"
-                    y="22"
-                    width="16"
-                    height="6"
-                    fill="#F0506E"
-                    opacity="0.85"
-                    rx="1"
-                  />
-                  <rect
-                    x="130"
-                    y="22"
-                    width="12"
-                    height="6"
-                    fill="#F0506E"
-                    opacity="0.85"
-                    rx="1"
-                  />
-                  <rect
-                    x="178"
-                    y="22"
-                    width="16"
-                    height="6"
-                    fill="#F0506E"
-                    opacity="0.85"
-                    rx="1"
-                  />
-                  <rect
-                    x="55"
-                    y="20"
-                    width="10"
-                    height="10"
-                    fill="#EA580C"
-                    opacity="0.25"
-                    rx="1"
-                  />
-                  <rect
-                    x="160"
-                    y="20"
-                    width="10"
-                    height="10"
-                    fill="#EA580C"
-                    opacity="0.25"
-                    rx="1"
-                  />
-                </svg>
-              </div>
-
-              <div class="phone-card category">
-                <div>
-                  <div class="cat-title">Hesitations</div>
-                  <div class="cat-sub">um, uh, ah · 47 found</div>
-                </div>
-                <div class="toggle"></div>
-              </div>
-
-              <div class="phone-cta ai-gradient-bg">Apply Cuts</div>
             </div>
+            <div class="phone-transcript">
+              <div class="transcript-status" id="transcriptStatus">
+                <span class="dot"></span>
+                <span id="statusLabel">Ready</span>
+              </div>
+              <div class="transcript-body" id="transcript">
+                <span class="w">So,</span><span class="w filler" data-filler>um,</span><span class="w">the</span><span class="w">cool</span><span class="w">thing</span><span class="w">is</span><span class="w pause" data-filler>— 2.4s pause —</span><span class="w filler" data-filler>uh,</span><span class="w">your</span><span class="w">audio</span><span class="w">never</span><span class="w filler" data-filler>like,</span><span class="w">leaves</span><span class="w">the</span><span class="w">phone.</span>
+              </div>
+            </div>
+            <div class="phone-bottom-cta">Apply Cuts</div>
           </div>
         </div>
-      </section>
+        <button class="replay-button" id="replayButton" type="button" aria-label="Replay demo">
+          ↻ Replay
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
 
-      <!-- ======================================================== -->
-      <!-- Section 3: Three feature cards                            -->
-      <!-- ======================================================== -->
-      <h2>Three tools, one phone.</h2>
-      <div class="cards">
-        <div class="card">
-          <h3>Smart Cut</h3>
-          <p>
-            Auto-detect filler words ("um," "uh," "like"), long silences, and
-            dead air. Every cut shows on a waveform timeline before export —
-            nothing is removed without your review.
-          </p>
-          <p>
-            Auto-transcript export to .txt, .srt, or .vtt. Per-session language
-            picker. iOS 26: long-form streaming via Apple's SpeechAnalyzer with
-            a live transcript pane during analysis.
-          </p>
+<!-- ================================================================ -->
+<!-- TRANSITION — dashboard-card with before/after waveforms          -->
+<!-- ================================================================ -->
+<section class="transition reveal">
+  <div class="transition-inner">
+    <div class="transition-head">
+      <div class="transition-eyebrow">Same recording. Different length.</div>
+      <h2 class="transition-title">
+        Smart Cut removes everything <em>between</em> the words you didn't say.
+      </h2>
+    </div>
+
+    <div class="dash">
+      <div class="dash-header">
+        <div class="left">
+          <h3>Session result</h3>
+          <span class="badge">on-device</span>
         </div>
-        <div class="card">
-          <h3>Denoise</h3>
-          <p>
-            DeepFilterNet3 on iPhone — a neural network built for speech.
-            Intensity slider to taste the result, A/B toggle to hear exactly
-            what changed. Works on subway commutes, busy cafés, humming offices.
-          </p>
+        <span class="meta">30 min · english · iphone 15 pro</span>
+      </div>
+
+      <div class="wave-block">
+        <div class="wave-row before">
+          <div class="label">Before</div>
+          <div class="wave-strip" id="wsBefore"></div>
+          <div class="duration">30:00</div>
         </div>
-        <div class="card">
-          <h3>Merge</h3>
-          <p>
-            Drag clips onto a timeline, set crossfades, export as M4A or WAV.
-            Loudness auto-normalized to broadcast standard (BS.1770 LUFS) —
-            volume jumps between clips disappear.
-          </p>
+        <div class="wave-row after">
+          <div class="label">After</div>
+          <div class="wave-strip" id="wsAfter"></div>
+          <div class="duration">22:28</div>
         </div>
       </div>
 
-      <!-- ======================================================== -->
-      <!-- Section 4: Privacy moat (dark strip)                      -->
-      <!-- ======================================================== -->
-      <section class="moat">
-        <div class="moat-eyebrow">On-device. Always.</div>
-        <h2>Your voice. Your iPhone. No cloud.</h2>
-        <p>
-          <em>Every comparable tool uploads your audio to a server.</em>
-          Descript, Riverside, Cleanvoice, Adobe Podcast — all of them ship your
-          voice to a data center, run AI on it, and ship the result back. That's
-          how it's been because the models were too big to run on a phone.
-        </p>
-        <p>
-          CleanCut runs entirely on your iPhone. The transcription model is
-          Apple's on-device SpeechAnalyzer (or SFSpeechRecognizer on iOS 17–25).
-          The denoise model is DeepFilterNet3, a small neural network built for
-          embedded inference. The merge timeline is AVFoundation. No analytics
-          SDK, no third-party tracker, no account. Turn on airplane mode —
-          CleanCut still works.
-        </p>
-        <p>
-          That's not a marketing claim we can hide behind. It's a structural
-          property: <em>there's no server to send it to.</em>
-        </p>
-      </section>
-
-      <!-- ======================================================== -->
-      <!-- Section 5: Pricing (4-card grid)                          -->
-      <!-- ======================================================== -->
-      <h2>Pricing</h2>
-      <div class="pricing">
-        <div class="tier-card">
-          <div class="tier-label">Free</div>
-          <div class="tier-price">$0</div>
-          <div class="tier-period">free forever</div>
-          <ul>
-            <li>3 Smart Cut sessions / day</li>
-            <li>3 Denoise sessions / day</li>
-            <li>Files ≤ 5 min (Smart Cut) or 3 min (Denoise)</li>
-            <li>Unlimited Merge, up to 3 clips</li>
-            <li>WAV export</li>
-          </ul>
-          <a class="cta-ghost" href="#">Download →</a>
+      <div class="dash-stats">
+        <div class="dash-stat">
+          <div class="num hero">30<span class="arrow">→</span>22</div>
+          <div class="label">Minutes (saved 7:32)</div>
         </div>
-
-        <div class="tier-card">
-          <div class="tier-label">Pro Monthly</div>
-          <div class="tier-price">$3.99</div>
-          <div class="tier-period">per month · 7-day free trial</div>
-          <ul>
-            <li>Everything in Free, unlimited</li>
-            <li>Export to M4A, MP3, WAV</li>
-            <li>No watermark</li>
-            <li>Custom filler libraries</li>
-            <li>Background processing</li>
-          </ul>
-          <a class="cta" href="#">Start trial</a>
+        <div class="dash-stat">
+          <div class="num">124</div>
+          <div class="label">Fillers removed</div>
+          <div class="sub">um · uh · like · you know</div>
         </div>
-
-        <div class="tier-card highlighted">
-          <div class="ribbon">Best Value</div>
-          <div class="tier-label">Pro Yearly</div>
-          <div class="tier-price">$19.99</div>
-          <div class="tier-period">per year · save 58% · 7-day free trial</div>
-          <ul>
-            <li>Everything in Free, unlimited</li>
-            <li>Export to M4A, MP3, WAV</li>
-            <li>No watermark</li>
-            <li>Custom filler libraries</li>
-            <li>Background processing</li>
-          </ul>
-          <a class="cta" href="#">Start trial</a>
+        <div class="dash-stat">
+          <div class="num">8</div>
+          <div class="label">Long pauses cut</div>
+          <div class="sub">≥ 2.4s · breath / silence</div>
         </div>
-
-        <div class="tier-card">
-          <div class="tier-label">Lifetime</div>
-          <div class="tier-price">$39.99</div>
-          <div class="tier-period">once · no subscription</div>
-          <ul>
-            <li>Everything in Pro, forever</li>
-            <li>One-time purchase</li>
-            <li>Never billed again</li>
-            <li>Same features as Pro Yearly</li>
-          </ul>
-          <a class="cta" href="#">Buy Lifetime</a>
+        <div class="dash-stat">
+          <div class="num">0</div>
+          <div class="label">Bytes uploaded</div>
+          <div class="sub">on-device, always</div>
         </div>
       </div>
-      <p class="cta-disclaimer" style="text-align: center; margin-top: 8px">
-        App Store links go live at launch. Restore Purchases lives in Settings →
-        Subscription. Cancel anytime.
-      </p>
+    </div>
 
-      <!-- ======================================================== -->
-      <!-- Section 6: FAQ                                            -->
-      <!-- ======================================================== -->
-      <h2>FAQ</h2>
-      <div class="faq">
-        <details>
-          <summary>Does Smart Cut work without internet?</summary>
-          <p>
-            Yes. Both Smart Cut (transcription) and Denoise run on-device. You
-            can put your phone in airplane mode and CleanCut works.
-          </p>
-        </details>
-        <details>
-          <summary>Which languages does Smart Cut support?</summary>
-          <p>
-            Whatever your iPhone's Speech framework supports — typically
-            English, Spanish, Portuguese, French, German, Italian, Japanese,
-            Korean, Chinese, and ~20 more. You pick a language per session. No
-            bilingual auto-detect at launch (single language per recording).
-          </p>
-        </details>
-        <details>
-          <summary>How does the iOS 26 version differ from iOS 17?</summary>
-          <p>
-            iOS 26 uses Apple's new SpeechAnalyzer for long-form streaming with
-            a live transcript pane that updates as the analysis runs. iOS 17–25
-            uses SFSpeechRecognizer in 30-second chunks — same accuracy, just
-            shown as a progress bar instead of streaming text.
-          </p>
-        </details>
-        <details>
-          <summary>How long does a recording take to process?</summary>
-          <p>
-            Roughly 2.5× faster than real time on iPhone 15 Pro and newer. A
-            30-minute recording takes ~12 minutes of foreground processing, or
-            you can hit "Run in BG" and lock your phone.
-          </p>
-        </details>
-        <details>
-          <summary>Why is the free tier limited?</summary>
-          <p>
-            The free tier covers a daily voice memo (3 Smart Cut + 3 Denoise
-            sessions a day, ≤5 min each). Beyond that, the on-device models use
-            real CPU/battery, so the economics need to net out. Pro is the
-            unlock for unlimited processing.
-          </p>
-        </details>
-        <details>
-          <summary>Is there a Mac version?</summary>
-          <p>
-            Not at launch. The on-device models are tuned for iPhone first.
-            macOS Catalyst is on the roadmap but not v1.x.
-          </p>
-        </details>
+    <p class="transition-foot">
+      Every cut shows on the waveform timeline before export — nothing is removed without your review.
+    </p>
+  </div>
+</section>
+
+<!-- ================================================================ -->
+<!-- FEATURES                                                         -->
+<!-- ================================================================ -->
+<section class="features reveal">
+  <h2>Three tools, <em>one phone.</em></h2>
+  <p class="features-sub">
+    Built for the way podcasters actually edit — on the bus, in the studio,
+    or after the kid finally fell asleep.
+  </p>
+  <div class="features-grid">
+    <article class="feature-big">
+      <div>
+        <div class="feat-tag">Headline feature</div>
+        <div class="feat-icon"><span class="icon-cut"></span></div>
       </div>
-
-      <!-- ======================================================== -->
-      <!-- Section 7: Founder note                                   -->
-      <!-- ======================================================== -->
-      <div class="founder">
-        <p>
-          Hi, I'm Danny Ng. I built CleanCut because I record voice notes
-          constantly — drafts, demos, talking-to-myself thinking sessions — and
-          I wanted to clean them up without uploading them anywhere.
-        </p>
-        <p>
-          Every audio tool I tried sent my audio to a server. Some had decent
-          privacy policies. None of them were as good as "the audio just never
-          leaves your phone." So I built that.
-        </p>
-        <p>
-          Smart Cut runs on Apple's SpeechAnalyzer (iOS 26) and
-          SFSpeechRecognizer (iOS 17–25). Denoise uses DeepFilterNet3, a
-          1.7M-parameter neural network compiled to Core ML. Merge is straight
-          AVFoundation. No backend. No analytics. Three tools, on the phone.
-        </p>
-        <p>
-          Free tier is generous (3 sessions a day forever — enough for a daily
-          voice memo). Pro is $3.99/mo or $19.99/yr if you want it unlimited;
-          one-time $39.99 if you hate subscriptions (I do too).
-        </p>
-        <p>
-          Feedback welcome —
-          <a href="mailto:support@cleancut.app">support@cleancut.app</a>.
-        </p>
-      </div>
-    </main>
-
-    <footer class="site">
+      <h3>Smart Cut</h3>
       <p>
-        &copy; 2026 CleanCut · <a href="privacy.html">Privacy</a> ·
-        <a href="terms.html">Terms</a> · <a href="support.html">Support</a>
+        Auto-detect filler words ("um," "uh," "like"), long silences, and
+        dead air. Every cut shows on a waveform timeline before export —
+        nothing is removed without your review. Auto-transcript export to
+        .txt, .srt, or .vtt.
       </p>
-    </footer>
-  </body>
+      <p style="font-size: 13px; color: var(--text-dim); margin-top: -8px;">
+        iOS 26: long-form streaming via Apple's SpeechAnalyzer with a live
+        transcript pane during analysis.
+      </p>
+      <div class="feat-meta">
+        <div>
+          <div class="feat-stat-num">2.5×</div>
+          <div class="feat-stat-label">Faster than realtime</div>
+        </div>
+        <div>
+          <div class="feat-stat-num">~30</div>
+          <div class="feat-stat-label">Languages</div>
+        </div>
+      </div>
+    </article>
+
+    <article class="feature-small">
+      <div class="feat-icon"><span class="icon-wave"><span></span><span></span><span></span><span></span><span></span></span></div>
+      <h3>Denoise</h3>
+      <p>
+        DeepFilterNet3 on iPhone — a neural network built for speech.
+        Intensity slider, A/B toggle to hear what changed. Works on subway
+        commutes, busy cafés, humming offices.
+      </p>
+    </article>
+
+    <article class="feature-small">
+      <div class="feat-icon"><span class="icon-merge"></span></div>
+      <h3>Merge</h3>
+      <p>
+        Drag clips onto a timeline, set crossfades, export as M4A or WAV.
+        Loudness auto-normalized to BS.1770 LUFS — volume jumps between
+        clips disappear.
+      </p>
+    </article>
+  </div>
+</section>
+
+<!-- ================================================================ -->
+<!-- PRIVACY MOAT                                                     -->
+<!-- ================================================================ -->
+<section class="moat reveal">
+  <div class="moat-inner">
+    <div>
+      <div class="moat-eyebrow">On-device. Always.</div>
+      <h2>Your voice. Your iPhone. <em>No cloud.</em></h2>
+      <p>
+        <strong>Every comparable tool uploads your audio to a server.</strong>
+        Descript, Riverside, Cleanvoice, Adobe Podcast — all of them ship
+        your voice to a data center, run AI on it, and ship the result back.
+      </p>
+      <p>
+        CleanCut runs entirely on your iPhone. Transcription is Apple's
+        SpeechAnalyzer (or SFSpeechRecognizer on iOS 17–25). Denoise is
+        DeepFilterNet3, a small neural network built for embedded inference.
+        Merge is AVFoundation. No analytics SDK. No third-party tracker.
+      </p>
+      <p>
+        That's not a marketing claim. It's a structural property:
+        <strong>there's no server to send it to.</strong>
+      </p>
+    </div>
+    <div class="proof-panel">
+      <div class="proof-label">Live · this session</div>
+      <div class="proof-stat">
+        <span class="proof-num" id="proofBytes">0</span>
+        <span class="proof-unit">bytes uploaded</span>
+      </div>
+      <div class="proof-label">Recent activity</div>
+      <div class="proof-feed" id="proofFeed"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================ -->
+<!-- PRICING                                                          -->
+<!-- ================================================================ -->
+<section class="pricing reveal">
+  <div class="pricing-head">
+    <div>
+      <h2>One free tier. <em>One paid plan.</em></h2>
+      <p class="pricing-sub">
+        No team plan. No "Enterprise — Contact Us." Just two options.
+      </p>
+    </div>
+    <div class="billing-toggle" role="tablist" aria-label="Billing period">
+      <button type="button" data-period="monthly" role="tab">Monthly</button>
+      <button type="button" data-period="yearly" role="tab" class="active">Yearly <span class="save-tag">−58%</span></button>
+      <button type="button" data-period="lifetime" role="tab">Lifetime</button>
+    </div>
+  </div>
+  <div class="pricing-grid">
+    <div class="tier free">
+      <div class="tier-label">Free · forever</div>
+      <div class="tier-price-row">
+        <span class="tier-price">$0</span>
+        <span class="tier-period">no card needed</span>
+      </div>
+      <p class="tier-note">A daily voice memo, on the house.</p>
+      <ul class="tier-list">
+        <li><svg class="check" viewBox="0 0 16 16" fill="none"><path d="M3 8.5l3 3 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> 3 Smart Cut sessions / day</li>
+        <li><svg class="check" viewBox="0 0 16 16" fill="none"><path d="M3 8.5l3 3 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> 3 Denoise sessions / day</li>
+        <li><svg class="check" viewBox="0 0 16 16" fill="none"><path d="M3 8.5l3 3 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Unlimited Merge, up to 3 clips</li>
+        <li><svg class="check" viewBox="0 0 16 16" fill="none"><path d="M3 8.5l3 3 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> WAV export</li>
+        <li><svg class="x" viewBox="0 0 16 16" fill="none"><path d="M4 4l8 8M12 4l-8 8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg> Files ≤ 5 min (Smart Cut) or 3 min (Denoise)</li>
+      </ul>
+      <a class="tier-cta" href="#">Download free →</a>
+    </div>
+    <div class="tier pro">
+      <div class="tier-label">Pro · <span id="proPeriodLabel">Yearly</span></div>
+      <div class="tier-price-row">
+        <span class="tier-price"><span id="proPrice">$19.99</span></span>
+        <span class="tier-period" id="proPeriodDetail">per year · save 58%</span>
+      </div>
+      <p class="tier-note" id="proTrialNote">7-day free trial · cancel anytime</p>
+      <ul class="tier-list">
+        <li><svg class="check" viewBox="0 0 16 16" fill="none"><path d="M3 8.5l3 3 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Everything in Free, unlimited</li>
+        <li><svg class="check" viewBox="0 0 16 16" fill="none"><path d="M3 8.5l3 3 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Files of any length (Smart Cut and Denoise)</li>
+        <li><svg class="check" viewBox="0 0 16 16" fill="none"><path d="M3 8.5l3 3 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Export to M4A, MP3, WAV · no watermark</li>
+        <li><svg class="check" viewBox="0 0 16 16" fill="none"><path d="M3 8.5l3 3 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Custom filler libraries</li>
+        <li><svg class="check" viewBox="0 0 16 16" fill="none"><path d="M3 8.5l3 3 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Background processing while phone is locked</li>
+      </ul>
+      <a class="tier-cta" id="proCta" href="#">Start 7-day trial →</a>
+    </div>
+  </div>
+  <p class="pricing-foot">
+    App Store links go live at launch. Restore Purchases lives in
+    Settings → Subscription.
+  </p>
+</section>
+
+<!-- ================================================================ -->
+<!-- FAQ                                                              -->
+<!-- ================================================================ -->
+<section class="faq reveal">
+  <h2><em>Questions.</em></h2>
+  <details>
+    <summary>Does Smart Cut work without internet?</summary>
+    <p>Yes. Both Smart Cut (transcription) and Denoise run on-device. Put your phone in airplane mode and CleanCut still works.</p>
+  </details>
+  <details>
+    <summary>Which languages does Smart Cut support?</summary>
+    <p>Whatever your iPhone's Speech framework supports — English, Spanish, Portuguese, French, German, Italian, Japanese, Korean, Chinese, and ~20 more. You pick a language per session. No bilingual auto-detect at launch.</p>
+  </details>
+  <details>
+    <summary>How does the iOS 26 version differ from iOS 17?</summary>
+    <p>iOS 26 uses Apple's new SpeechAnalyzer for long-form streaming with a live transcript pane that updates as the analysis runs. iOS 17–25 uses SFSpeechRecognizer in 30-second chunks — same accuracy, just shown as a progress bar instead of streaming text.</p>
+  </details>
+  <details>
+    <summary>How long does a recording take to process?</summary>
+    <p>Roughly 2.5× faster than real time on iPhone 15 Pro and newer. A 30-minute recording takes ~12 minutes of foreground processing, or you can hit "Run in BG" and lock your phone.</p>
+  </details>
+  <details>
+    <summary>Why is the free tier limited?</summary>
+    <p>The free tier covers a daily voice memo (3 Smart Cut + 3 Denoise sessions a day, ≤5 min each). Beyond that, the on-device models use real CPU/battery, so the economics need to net out.</p>
+  </details>
+  <details>
+    <summary>Is there a Mac version?</summary>
+    <p>Not at launch. The on-device models are tuned for iPhone first. macOS Catalyst is on the roadmap but not v1.x.</p>
+  </details>
+</section>
+
+<!-- ================================================================ -->
+<!-- FOUNDER                                                          -->
+<!-- ================================================================ -->
+<section class="founder reveal">
+  <div class="founder-card">
+    <div class="founder-meta">
+      <div class="founder-avatar">D</div>
+      <div class="founder-name">Danny Ng</div>
+      <div class="founder-handle">Maker of CleanCut</div>
+    </div>
+    <div class="founder-quote">
+      <p>
+        I built CleanCut because I record voice notes constantly — drafts,
+        demos, talking-to-myself thinking sessions — and I wanted to clean
+        them up without uploading them anywhere.
+      </p>
+      <p class="pull">
+        None of them were as good as "the audio just never leaves your
+        phone." So I built that.
+      </p>
+      <p>
+        Smart Cut runs on Apple's SpeechAnalyzer (iOS 26) and
+        SFSpeechRecognizer (iOS 17–25). Denoise uses DeepFilterNet3, a
+        1.7M-parameter neural net compiled to Core ML. Merge is straight
+        AVFoundation. No backend. No analytics. Three tools, on the phone.
+      </p>
+      <p class="founder-contact">
+        Feedback welcome — <a href="mailto:danny.ng.it@gmail.com">danny.ng.it@gmail.com</a>.
+      </p>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="site">
+  <p>
+    &copy; 2026 CleanCut · <a href="privacy.html">Privacy</a> ·
+    <a href="terms.html">Terms</a> · <a href="support.html">Support</a>
+  </p>
+</footer>
+
+<script>
+/* ====================================================================
+   AMBIENT HERO WAVEFORM — slow continuous pulse
+   ==================================================================== */
+(() => {
+  const wave = document.getElementById('waveBg');
+  if (!wave) return;
+  const W = window.innerWidth;
+  const barCount = Math.floor(W / 8);
+
+  function seedHeight(i) {
+    const base = (Math.sin(i * 0.4) + Math.sin(i * 0.13) + Math.sin(i * 0.7)) / 3;
+    return 30 + Math.abs(base) * 280 + ((i * 13) % 40);
+  }
+  for (let i = 0; i < barCount; i++) {
+    const bar = document.createElement('div');
+    bar.className = 'wave-bar';
+    bar.style.height = seedHeight(i) + 'px';
+    bar.dataset.base = seedHeight(i);
+    wave.appendChild(bar);
+  }
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  let tick = 0;
+  setInterval(() => {
+    tick += 0.6;
+    const bars = wave.querySelectorAll('.wave-bar');
+    bars.forEach((bar, i) => {
+      const base = parseFloat(bar.dataset.base);
+      const variation = Math.sin(tick + i * 0.15) * 0.18;
+      bar.style.height = (base * (1 + variation)) + 'px';
+    });
+  }, 2400);
+})();
+
+/* ====================================================================
+   TRANSITION — build before/after waveforms
+   ==================================================================== */
+(() => {
+  const before = document.getElementById('wsBefore');
+  const after = document.getElementById('wsAfter');
+  if (!before || !after) return;
+
+  const BAR_COUNT = 120;
+  const cuts = [
+    {start: 4, len: 3}, {start: 12, len: 2}, {start: 22, len: 4},
+    {start: 35, len: 2}, {start: 46, len: 3}, {start: 58, len: 4},
+    {start: 71, len: 2}, {start: 84, len: 5}, {start: 95, len: 2}
+  ];
+  function seedH(i) {
+    const p = (Math.sin(i * 0.3) + Math.sin(i * 0.7) + Math.sin(i * 1.1)) / 3;
+    return 14 + Math.abs(p) * 36 + ((i * 7) % 8);
+  }
+  function isCut(pct) {
+    return cuts.some(c => pct >= c.start && pct < c.start + c.len);
+  }
+  for (let i = 0; i < BAR_COUNT; i++) {
+    const bar = document.createElement('div');
+    bar.className = 'b';
+    bar.style.height = seedH(i) + 'px';
+    const pct = (i / BAR_COUNT) * 100;
+    if (isCut(pct)) bar.classList.add('cut');
+    before.appendChild(bar);
+  }
+  const cleaned = [];
+  for (let i = 0; i < BAR_COUNT; i++) {
+    const pct = (i / BAR_COUNT) * 100;
+    if (!isCut(pct)) cleaned.push(seedH(i));
+  }
+  for (let i = 0; i < cleaned.length; i++) {
+    const bar = document.createElement('div');
+    bar.className = 'b';
+    bar.style.height = cleaned[i] + 'px';
+    after.appendChild(bar);
+  }
+  const tail = document.createElement('div');
+  tail.className = 'empty-tail';
+  tail.textContent = '−7:32 saved';
+  after.appendChild(tail);
+})();
+
+/* ====================================================================
+   TRANSCRIPT TRANSFORMATION DEMO
+   ==================================================================== */
+(() => {
+  const transcript = document.getElementById('transcript');
+  const status = document.getElementById('transcriptStatus');
+  const statusLabel = document.getElementById('statusLabel');
+  const replayBtn = document.getElementById('replayButton');
+  const sessionSaved = document.getElementById('sessionSaved');
+  const chipFillers = document.getElementById('chipFillers');
+  const chipPauses = document.getElementById('chipPauses');
+  const sessionLabel = document.getElementById('sessionLabel');
+
+  const sleep = (ms) => new Promise(r => setTimeout(r, ms));
+
+  function setStatus(label, mode) {
+    statusLabel.textContent = label;
+    status.classList.remove('analyzing', 'cutting', 'done');
+    if (mode) status.classList.add(mode);
+  }
+  function fmtSeconds(totalSec) {
+    const m = Math.floor(totalSec / 60);
+    const s = Math.floor(totalSec % 60);
+    return m + ':' + (s < 10 ? '0' : '') + s;
+  }
+  let isAnimating = false;
+  async function resetTranscript() {
+    transcript.querySelectorAll('.w').forEach(w => {
+      w.classList.remove('detected', 'striking', 'removing');
+    });
+    sessionSaved.textContent = '0:00';
+    chipFillers.textContent = '0';
+    chipPauses.textContent = '0';
+    sessionLabel.textContent = '30 min';
+    setStatus('Ready', null);
+    replayBtn.classList.remove('visible');
+  }
+  async function runDemo() {
+    if (isAnimating) return;
+    isAnimating = true;
+    await resetTranscript();
+    await sleep(400);
+
+    setStatus('Analyzing…', 'analyzing');
+    const fillers = transcript.querySelectorAll('.w[data-filler]');
+    await sleep(700);
+
+    for (const f of fillers) {
+      f.classList.add('detected');
+      await sleep(160);
+    }
+    sessionLabel.textContent = `${fillers.length} cuts found`;
+    await sleep(900);
+
+    setStatus('Applying Smart Cut…', 'cutting');
+    fillers.forEach(f => f.classList.remove('detected'));
+    await sleep(300);
+
+    const totalFillers = 124;
+    const totalPauses = 8;
+    const totalSavedSec = 7 * 60 + 32;
+
+    for (let i = 0; i < fillers.length; i++) {
+      const f = fillers[i];
+      f.classList.add('striking');
+      await sleep(220);
+      f.classList.add('removing');
+      const progress = (i + 1) / fillers.length;
+      chipFillers.textContent = Math.round(totalFillers * progress);
+      chipPauses.textContent = Math.round(totalPauses * progress);
+      sessionSaved.textContent = fmtSeconds(Math.round(totalSavedSec * progress));
+      await sleep(380);
+    }
+
+    await sleep(300);
+    setStatus('Cleaned ✓', 'done');
+    sessionLabel.textContent = '22 min · cleaned';
+    await sleep(400);
+
+    replayBtn.classList.add('visible');
+    isAnimating = false;
+  }
+
+  const stage = document.getElementById('heroPhoneStage');
+  let played = false;
+  const heroIO = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting && !played) {
+        played = true;
+        setTimeout(runDemo, 600);
+      }
+    });
+  }, { threshold: 0.35 });
+  heroIO.observe(stage);
+  replayBtn.addEventListener('click', runDemo);
+})();
+
+/* ====================================================================
+   PHONE CURSOR-TILT
+   ==================================================================== */
+(() => {
+  const phone = document.getElementById('phoneFrame');
+  const stage = document.getElementById('heroPhoneStage');
+  if (!phone || !stage) return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  if (window.matchMedia('(pointer: coarse)').matches) return;
+
+  const MAX_TILT = 5;
+  let rafId = null;
+  let tx = 0, ty = 0;
+
+  function onMove(e) {
+    const rect = stage.getBoundingClientRect();
+    const cx = rect.left + rect.width / 2;
+    const cy = rect.top + rect.height / 2;
+    const dx = (e.clientX - cx) / (rect.width / 2);
+    const dy = (e.clientY - cy) / (rect.height / 2);
+    tx = Math.max(-1, Math.min(1, dx)) * MAX_TILT;
+    ty = Math.max(-1, Math.min(1, dy)) * MAX_TILT;
+    if (!rafId) rafId = requestAnimationFrame(apply);
+  }
+  function apply() {
+    phone.style.transform = `rotateY(${tx}deg) rotateX(${-ty}deg)`;
+    rafId = null;
+  }
+  function onLeave() {
+    tx = 0; ty = 0;
+    phone.style.transform = 'rotateY(0deg) rotateX(0deg)';
+  }
+  const hero = document.querySelector('.hero');
+  hero.addEventListener('mousemove', onMove);
+  hero.addEventListener('mouseleave', onLeave);
+})();
+
+/* ====================================================================
+   SCROLL REVEAL
+   ==================================================================== */
+(() => {
+  const reveals = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('is-visible');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  reveals.forEach(r => io.observe(r));
+})();
+
+/* ====================================================================
+   PRIVACY PROOF FEED — live "0 bytes uploaded"
+   ==================================================================== */
+(() => {
+  const feed = document.getElementById('proofFeed');
+  const proofBytes = document.getElementById('proofBytes');
+  if (!feed) return;
+
+  const ACTIONS = [
+    'Smart Cut · 14 MB recording',
+    'Denoise · 8 MB audio',
+    'Merge · 3 clips · 22 MB',
+    'Transcript export · .srt',
+    'Smart Cut · 6 MB voice memo',
+    'Denoise · 11 MB recording',
+    'Merge · 2 clips · 18 MB',
+    'Smart Cut · 21 MB session',
+  ];
+  let nextId = 0;
+  const MAX_ROWS = 3;
+
+  function fmtTime() {
+    return new Date().toTimeString().slice(0, 8);
+  }
+  function pushRow() {
+    const action = ACTIONS[nextId % ACTIONS.length];
+    nextId++;
+    const row = document.createElement('div');
+    row.className = 'proof-row';
+    row.innerHTML = `
+      <span class="proof-time">${fmtTime()}</span>
+      <span class="proof-action">${action}</span>
+      <span class="proof-result">0 bytes</span>
+    `;
+    feed.appendChild(row);
+    while (feed.children.length > MAX_ROWS) {
+      feed.removeChild(feed.firstChild);
+    }
+  }
+
+  let started = false;
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting && !started) {
+        started = true;
+        pushRow();
+        setTimeout(pushRow, 500);
+        setTimeout(pushRow, 1000);
+        setInterval(pushRow, 3200);
+      }
+    });
+  }, { threshold: 0.3 });
+  io.observe(feed);
+
+  setInterval(() => {
+    proofBytes.style.color = '#fff';
+    setTimeout(() => { proofBytes.style.color = ''; }, 250);
+  }, 2100);
+})();
+
+/* ====================================================================
+   PRICING BILLING TOGGLE
+   ==================================================================== */
+(() => {
+  const buttons = document.querySelectorAll('.billing-toggle button');
+  const priceEl = document.getElementById('proPrice');
+  const periodLabel = document.getElementById('proPeriodLabel');
+  const periodDetail = document.getElementById('proPeriodDetail');
+  const trialNote = document.getElementById('proTrialNote');
+  const cta = document.getElementById('proCta');
+
+  const PLANS = {
+    monthly: { label: 'Monthly', price: '$3.99', detail: 'per month', trial: '7-day free trial · cancel anytime', cta: 'Start 7-day trial →' },
+    yearly:  { label: 'Yearly',  price: '$19.99', detail: 'per year · save 58%', trial: '7-day free trial · cancel anytime', cta: 'Start 7-day trial →' },
+    lifetime:{ label: 'Lifetime', price: '$39.99', detail: 'once · no subscription', trial: 'One payment. Never billed again.', cta: 'Buy lifetime →' }
+  };
+
+  buttons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      buttons.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const plan = PLANS[btn.dataset.period];
+      priceEl.textContent = plan.price;
+      periodLabel.textContent = plan.label;
+      periodDetail.textContent = plan.detail;
+      trialNote.textContent = plan.trial;
+      cta.textContent = plan.cta;
+    });
+  });
+})();
+</script>
+</body>
 </html>
